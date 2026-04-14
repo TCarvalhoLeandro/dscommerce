@@ -1,27 +1,24 @@
 package com.leandro.dscommerce.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leandro.dscommerce.entities.Product;
-import com.leandro.dscommerce.repositories.ProductRepository;
+import com.leandro.dscommerce.DTO.ProductDTO;
+import com.leandro.dscommerce.services.ProductService;
 
 @RestController
 @RequestMapping(value = "/products")
 public class ProductController {
 
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productService;
 	
-	@GetMapping
-	public String teste(Long id) {
-		Optional<Product> result = productRepository.findById(1L);
-		Product product = result.get();
-		
-		return product.getName();
+	@GetMapping(value = "/{id}")
+	public ProductDTO findById(@PathVariable Long id) {
+		ProductDTO dto = productService.findById(id);
+		return dto;
 	}
 }
