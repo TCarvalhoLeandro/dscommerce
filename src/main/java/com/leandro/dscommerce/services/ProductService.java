@@ -45,6 +45,28 @@ public class ProductService {
 		// converte Product em dto e retorna dto
 		return new ProductDTO(product);
 	}
+	
+	
+	@Transactional
+	public ProductDTO update(Long id, ProductDTO dto) {
+		// pega a referencia do Product pelo id passado
+		Product product = productRepository.getReferenceById(id);
+		// atualiza o product com os dados do dto
+		copyDtoToEntity(dto, product);
+		// salva no banco o novo product
+		product = productRepository.save(product);
+		// retorna o dto
+		return new ProductDTO(product);
+	}
+	
+	private void copyDtoToEntity(ProductDTO dto, Product product) {
+		product.setName(dto.getName());
+		product.setDescription(dto.getDescription());
+		product.setPrice(dto.getPrice());
+		product.setImgUrl(dto.getImgUrl());
+
+	}
+	
 }
 
 
