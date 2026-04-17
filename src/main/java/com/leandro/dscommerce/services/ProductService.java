@@ -19,6 +19,7 @@ public class ProductService {
 	private ProductRepository productRepository;
 	
 	// service retorna DTO
+	// readOnly = true sinaliza que esse endpoint so faz consulta no banco para economizar memoria
 	@Transactional(readOnly = true)
 	public ProductDTO findById(Long id) {
 		Optional<Product> result = productRepository.findById(id);
@@ -29,15 +30,20 @@ public class ProductService {
 	
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAll(Pageable pageable){
+		// Page no lugar de List para salvar os metadados da paginacao
 		Page<Product> result = productRepository.findAll(pageable);
 		// lambda para converter p/ DTO e retornar uma lista
 		return result.map(x -> new ProductDTO(x));
 	}
 	
-	
-	public void insert(ProductDTO entity) {
-		Product product = new Product(entity);
-		productRepository.save(product);
+	@Transactional
+	public ProductDTO insert(ProductDTO dto) {
+		// converte o dto em Product
+		Product product = new Product(dto);
+		// chama o metodo inderir do JPA
+		product = productRepository.save(product);
+		// converte Product em dto e retorna dto
+		return new ProductDTO(product);
 	}
 }
 

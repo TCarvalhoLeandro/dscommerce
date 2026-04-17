@@ -43,12 +43,11 @@ public class Product {
 
 	}
 
-	public Product(ProductDTO entity) {
-		this.id = entity.getId();
-		this.name = entity.getName();
-		this.description = entity.getDescription();
-		this.price = entity.getPrice();
-		this.imgUrl = entity.getImgUrl();
+	public Product(ProductDTO dto) {
+		this.name = dto.getName();
+		this.description = dto.getDescription();
+		this.price = dto.getPrice();
+		this.imgUrl = dto.getImgUrl();
 	}
 
 	public Product(Long id, String name, String description, Double price, String imgUrl) {
