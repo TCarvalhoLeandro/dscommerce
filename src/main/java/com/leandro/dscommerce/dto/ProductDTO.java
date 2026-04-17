@@ -1,6 +1,10 @@
-package com.leandro.dscommerce.DTO;
+package com.leandro.dscommerce.dto;
 
 import com.leandro.dscommerce.entities.Product;
+
+// DTO - Data Tranfer Object (Objeto de Transferencia de Dados)
+
+// Nao e necessario set no DTO porque a finalidade é recuperar os dados e não modificar
 
 public class ProductDTO {
 
@@ -13,6 +17,7 @@ public class ProductDTO {
 	public ProductDTO() {
 	}
 
+	// para facilitar a criacao do DTO instancia direto recebendo um Product
 	public ProductDTO(Product entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
@@ -20,6 +25,7 @@ public class ProductDTO {
 		this.price = entity.getPrice();
 		this.imgUrl = entity.getImgUrl();
 	}
+	
 
 	public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
 		this.id = id;
