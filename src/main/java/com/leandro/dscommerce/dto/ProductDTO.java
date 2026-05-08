@@ -24,6 +24,7 @@ public class ProductDTO {
 	
 	@Positive(message = "O preço deve ser positivo.")
 	private Double price;
+	
 	private String imgUrl;
 
 	public ProductDTO() {

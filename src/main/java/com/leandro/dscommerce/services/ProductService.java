@@ -33,9 +33,9 @@ public class ProductService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAll(Pageable pageable){
+	public Page<ProductDTO> findAll(String name, Pageable pageable){
 		// Page no lugar de List para salvar os metadados da paginacao
-		Page<Product> result = productRepository.findAll(pageable);
+		Page<Product> result = productRepository.searchByName(name, pageable);
 		// lambda para converter p/ DTO e retornar uma lista
 		return result.map(x -> new ProductDTO(x));
 	}
